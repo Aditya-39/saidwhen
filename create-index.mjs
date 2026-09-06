@@ -8,7 +8,7 @@ const env = Object.fromEntries(
 
 const client = new MongoClient(env.MONGODB_URI);
 await client.connect();
-const col = client.db(env.MONGODB_DB || "echovault").collection("chunks");
+const col = client.db(env.MONGODB_DB || "saidwhen").collection("chunks");
 
 const name = await col.createSearchIndex({
   name: "chunk_vector_index",

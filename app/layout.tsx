@@ -1,6 +1,6 @@
 import "./globals.css";
 
-export const metadata = { title: "EchoVault" };
+export const metadata = { title: "saidwhen" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

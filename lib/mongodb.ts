@@ -5,7 +5,7 @@ let cached: Promise<MongoClient> | null = null;
 
 export async function getDb(): Promise<Db> {
   if (!cached) cached = new MongoClient(uri).connect();
-  return (await cached).db(process.env.MONGODB_DB || "echovault");
+  return (await cached).db(process.env.MONGODB_DB || "saidwhen");
 }
 
 export type Chunk = {
