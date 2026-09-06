@@ -55,6 +55,6 @@ function buildChunk(words: Word[]): TimeChunk {
     text: text.trim(),
     start: words[0].start,
     end: words[words.length - 1].end,
-    speakers: [...speakers],
+    speakers: Array.from(speakers),
   };
 }

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@deepgram/sdk";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { put } from "@vercel/blob";
 import { randomUUID } from "crypto";
+import path from "path";
 import { getDb, Chunk, Meeting } from "@/lib/mongodb";
 import { chunkByTime, Word } from "@/lib/chunk";
 import { embed } from "@/lib/gemini";
@@ -21,10 +21,15 @@ export async function POST(req: NextRequest) {
     const meetingId = randomUUID();
     const ext = path.extname(file.name) || ".mp3";
 
-    const dir = path.join(process.cwd(), "public", "uploads");
-    await mkdir(dir, { recursive: true });
-    await writeFile(path.join(dir, `${meetingId}${ext}`), buffer);
-    const audioUrl = `/uploads/${meetingId}${ext}`;
+    // Upload audio to Vercel Blob instead of the local filesystem.
+    // Serverless functions can't write to disk permanently, so this is
+    // what lets uploads actually work once the app is deployed, not
+    // just when running on your own machine.
+    const blob = await put(`uploads/${meetingId}${ext}`, buffer, {
+      access: "public",
+      contentType: file.type || "audio/mpeg",
+    });
+    const audioUrl = blob.url;
 
     const dg = createClient(process.env.DEEPGRAM_API_KEY!);
     const { result, error } = await dg.listen.prerecorded.transcribeFile(buffer, {
