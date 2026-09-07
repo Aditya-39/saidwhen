@@ -38,7 +38,7 @@ export default function SaidWhenLogo({
         viewBox={viewBox}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ overflow: 'visible' }}
+        style={{ maxWidth: '100%', height: 'auto', overflow: 'visible' }}
       >
         <style>{`
           @keyframes sw-pulse-dot {
@@ -87,16 +87,32 @@ export default function SaidWhenLogo({
           .sw-logo-wrapper:hover .sw-b3 { animation-duration: 0.75s; }
         `}</style>
 
-        {/* SOUNDWAVE MARK — a small equalizer-style bar cluster,
-            short-tall-short, echoing the hero waveform's shape language. */}
-        <circle cx="8" cy="41" r="1.8" fill={accentColor} opacity="0.6" className="sw-dot" />
+        {/* 1. EXACT GEOMETRIC FACE PROFILE (from user drawing) */}
+        <path
+          d="M 16 16
+             L 31 16
+             C 35 16 38 18 40 21
+             L 45 30
+             C 46 32 45 34 44 36
+             L 43 40
+             L 32 46
+             L 41 52
+             L 41 56
+             C 41 60 38 62 34 62
+             L 24 62
+             C 18 62 14 66 12 72"
+          stroke={color}
+          strokeWidth="3.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
 
-        <line x1="18" y1="34" x2="18" y2="48" stroke={color} strokeWidth="3.4" strokeLinecap="round" opacity="0.4" />
-        <line x1="27" y1="26" x2="27" y2="56" stroke={accentColor} strokeWidth="3.6" strokeLinecap="round" className="sw-b1" />
-        <line x1="36" y1="16" x2="36" y2="66" stroke={accentColor} strokeWidth="3.8" strokeLinecap="round" className="sw-b2" />
-        <line x1="45" y1="24" x2="45" y2="58" stroke={accentColor} strokeWidth="3.6" strokeLinecap="round" className="sw-b3" />
-        <line x1="54" y1="32" x2="54" y2="50" stroke={color} strokeWidth="3.4" strokeLinecap="round" opacity="0.4" />
-        <line x1="63" y1="37" x2="63" y2="45" stroke={color} strokeWidth="3" strokeLinecap="round" opacity="0.25" />
+        {/* 2. SOUNDWAVE BARS (Radiating from the mouth opening) */}
+        <circle cx="37" cy="46" r="2.2" fill={accentColor} className="sw-dot" />
+        <line x1="49" y1="39" x2="49" y2="53" stroke={accentColor} strokeWidth="3.8" strokeLinecap="round" className="sw-b1" />
+        <line x1="58" y1="31" x2="58" y2="61" stroke={accentColor} strokeWidth="3.8" strokeLinecap="round" className="sw-b2" />
+        <line x1="67" y1="37" x2="67" y2="55" stroke={accentColor} strokeWidth="3.8" strokeLinecap="round" className="sw-b3" />
 
         {/* "saidwhen" wordmark */}
         {showText && (
